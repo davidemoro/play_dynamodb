@@ -17,7 +17,7 @@ play dynamodb
         :target: https://codecov.io/gh/tierratelematics/play_dynamodb
 
 
-pytest-play support for DynamoDB queries and assertions
+pytest-play support for AWS DynamoDB queries and assertions
 
 More info and examples on:
 

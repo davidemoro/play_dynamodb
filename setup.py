@@ -30,7 +30,7 @@ test_requirements = [
 setup(
     name='play_dynamodb',
     version='0.0.1',
-    description="pytest-play support for DynamoDB queries and assertions",
+    description="pytest-play support for AWS DynamoDB queries and assertions",
     long_description=readme + '\n\n' + history,
     author="Davide Moro",
     author_email='davide.moro@gmail.com',
