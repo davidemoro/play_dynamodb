@@ -43,7 +43,7 @@ This project defines new pytest-play_ commands for AWS DynamoDB:
      'variable_expression': 'response',
      'assertion': 'item['Item']['AlbumTitle']['S'] == 'Songs About Life'',
      'parameters': {
-         Key={
+         'Key': {
              'Artist': {
                  'S': 'Acme Band',
                  },
@@ -51,7 +51,7 @@ This project defines new pytest-play_ commands for AWS DynamoDB:
                  'S': 'Happy Day',
                  },
              },
-         TableName='Music',
+         'TableName': 'Music',
          }
     }
 
@@ -62,11 +62,11 @@ Supported methods:
 * delete_item
 * describe_table
 * get_item
-* list_tables 
-* put_item 
-* query 
-* scan 
-* update_item 
+* list_tables
+* put_item
+* query
+* scan
+* update_item
 
 
 Twitter

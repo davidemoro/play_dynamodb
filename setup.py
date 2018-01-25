@@ -18,13 +18,12 @@ requirements = [
 
 setup_requirements = [
     'pytest-runner',
-    'moto',
 ]
 
 test_requirements = [
     'pytest',
     'pytest-cov',
-    # TODO: put package test requirements here
+    'mock',
 ]
 
 setup(
