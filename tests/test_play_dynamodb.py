@@ -307,3 +307,37 @@ def test_provider(play_json, command):
                 command['method']) \
             .assert_called_with(
                 **command['parameters']) is None
+
+
+@pytest.mark.parametrize(
+    'command',
+    [
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'delete_table',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'TableName': 'Music',
+          }
+      },
+    ])
+def test_provider_not_allowed(play_json, command):
+    import mock
+    from play_dynamodb import providers
+    provider = providers.DynamoDBProvider(play_json)
+    assert provider.engine is play_json
+
+    with mock.patch('play_dynamodb.providers.boto3') as boto3:
+        with pytest.raises(ValueError):
+            provider.command_dynamodb(command)
+        assert boto3 \
+            .resource \
+            .called is False
+        assert getattr(
+                boto3.resource.return_value,
+                command['method']) \
+            .called is False
