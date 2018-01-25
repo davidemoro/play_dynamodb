@@ -154,6 +154,140 @@ def variables():
           'TableName': 'Music',
           },
       },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'describe_limits',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          },
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'describe_table',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+              'TableName': 'Music'
+          },
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'list_tables',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          },
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'put_item',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'Item': {
+              'AlbumTitle': {
+                  'S': 'Somewhat Famous',
+              },
+              'Artist': {
+                  'S': 'No One You Know',
+              },
+              'SongTitle': {
+                  'S': 'Call Me Today',
+              },
+          },
+          'ReturnConsumedCapacity': 'TOTAL',
+          'TableName': 'Music',
+          },
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'query',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'ExpressionAttributeValues': {
+              ':v1': {
+                  'S': 'No One You Know',
+              },
+          },
+          'KeyConditionExpression': 'Artist = :v1',
+          'ProjectionExpression': 'SongTitle',
+          'TableName': 'Music',
+          }
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'scan',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'ExpressionAttributeNames': {
+              'AT': 'AlbumTitle',
+              'ST': 'SongTitle',
+          },
+          'ExpressionAttributeValues': {
+              ':a': {
+                  'S': 'No One You Know',
+              },
+          },
+          'FilterExpression': 'Artist = :a',
+          'ProjectionExpression': '#ST, #AT',
+          'TableName': 'Music',
+          }
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'update_item',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'ExpressionAttributeNames': {
+              '#AT': 'AlbumTitle',
+              '#Y': 'Year',
+          },
+          'ExpressionAttributeValues': {
+              ':t': {
+                  'S': 'Louder Than Ever',
+              },
+              ':y': {
+                  'N': '2015',
+              },
+          },
+          'Key': {
+              'Artist': {
+                  'S': 'Acme Band',
+              },
+              'SongTitle': {
+                  'S': 'Happy Day',
+              },
+          },
+          'ReturnValues': 'ALL_NEW',
+          'TableName': 'Music',
+          'UpdateExpression': 'SET #Y = :y, #AT = :t',
+          }
+      },
     ])
 def test_provider(play_json, command):
     import mock
