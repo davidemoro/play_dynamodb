@@ -38,7 +38,7 @@ setup(
     packages=find_packages(include=['play_dynamodb']),
     entry_points={
         'playcommands': [
-            'print = play_dynamodb.providers:NewProvider',
+            'dynamodb = play_dynamodb.providers:DynamoDBProvider',
         ],
     },
     include_package_data=True,
