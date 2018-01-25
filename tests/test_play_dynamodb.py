@@ -134,6 +134,26 @@ def variables():
               },
           },
       },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'delete_item',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'Key': {
+              'Artist': {
+                  'S': 'No One You Know',
+                  },
+              'SongTitle': {
+                  'S': 'Scared of My Shadow',
+                  },
+              },
+          'TableName': 'Music',
+          },
+      },
     ])
 def test_provider(play_json, command):
     import mock
