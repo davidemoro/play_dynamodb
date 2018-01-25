@@ -33,7 +33,107 @@ def variables():
               },
           'TableName': 'Music',
           }
-      }
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'batch_get_item',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'RequestItems': {
+              'Music': {
+                  'Keys': [
+                      {
+                          'Artist': {
+                              'S': 'No One You Know',
+                          },
+                          'SongTitle': {
+                              'S': 'Call Me Today',
+                          },
+                      },
+                      {
+                          'Artist': {
+                              'S': 'Acme Band',
+                          },
+                          'SongTitle': {
+                              'S': 'Happy Day',
+                          },
+                      },
+                      {
+                          'Artist': {
+                              'S': 'No One You Know',
+                          },
+                          'SongTitle': {
+                              'S': 'Scared of My Shadow',
+                          },
+                      }],
+                  'ProjectionExpression': 'AlbumTitle',
+                  },
+              }
+          }
+      },
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'batch_write_item',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'RequestItems': {
+              'Music': [
+                  {
+                      'PutRequest': {
+                          'Item': {
+                              'AlbumTitle': {
+                                  'S': 'Somewhat Famous',
+                              },
+                              'Artist': {
+                                  'S': 'No One You Know',
+                              },
+                              'SongTitle': {
+                                  'S': 'Call Me Today',
+                              },
+                          },
+                      },
+                  },
+                  {
+                      'PutRequest': {
+                          'Item': {
+                              'AlbumTitle': {
+                                  'S': 'Songs About Life',
+                              },
+                              'Artist': {
+                                  'S': 'Acme Band',
+                              },
+                              'SongTitle': {
+                                  'S': 'Happy Day',
+                              },
+                          },
+                      },
+                  },
+                  {
+                      'PutRequest': {
+                          'Item': {
+                              'AlbumTitle': {
+                                  'S': 'Blue Sky Blues',
+                              },
+                              'Artist': {
+                                  'S': 'No One You Know',
+                              },
+                              'SongTitle': {
+                                  'S': 'Scared of My Shadow',
+                              },
+                          },
+                      },
+                  }],
+              },
+          },
+      },
     ])
 def test_provider(play_json, command):
     import mock
