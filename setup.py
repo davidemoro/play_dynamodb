@@ -13,12 +13,12 @@ with open('CHANGES.rst') as history_file:
 
 requirements = [
     'pytest-play>=1.0.0',
-    # TODO: put package requirements here
+    'boto3',
 ]
 
 setup_requirements = [
     'pytest-runner',
-    # TODO(tierratelematics): put setup requirements (distutils extensions, etc.) here
+    'moto',
 ]
 
 test_requirements = [
