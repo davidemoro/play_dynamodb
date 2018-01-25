@@ -401,3 +401,64 @@ def test_provider_variable_assertion(play_json, command):
                 **command['parameters']) is None
         assert 'item' in play_json.variables
         assert play_json.variables['item']
+
+
+@pytest.mark.parametrize(
+    'command',
+    [
+     {
+      'provider': 'play_dynamodb',
+      'type': 'dynamodb',
+      'method': 'get_item',
+      'variable': 'item',
+      'variable_expression': 'results["Item"]',
+      'assertion': 'variables["item"]["AlbumTitle"]["S"] '
+                   '== "SonGs About Life"',
+      'connection': {
+          'region_name': 'us-west-2',
+          'endpoint_url': 'http://localhost:8000',
+          },
+      'parameters': {
+          'Key': {
+              'Artist': {
+                  'S': 'Acme Band',
+                  },
+              'SongTitle': {
+                  'S': 'Happy Day',
+                  },
+              },
+          'TableName': 'Music',
+          }
+      },
+    ])
+def test_provider_variable_assertion_ko(play_json, command):
+    import mock
+    from play_dynamodb import providers
+    provider = providers.DynamoDBProvider(play_json)
+    assert provider.engine is play_json
+
+    with mock.patch('play_dynamodb.providers.boto3') as boto3:
+        getattr(
+                boto3.resource.return_value,
+                command['method']) \
+            .return_value = {
+                'Item': {
+                    'AlbumTitle': {
+                        'S': 'Songs About Life'
+                        }
+                    }
+                }
+        with pytest.raises(AssertionError):
+            provider.command_dynamodb(command)
+        assert boto3 \
+            .resource \
+            .assert_called_with(
+                'dynamodb',
+                **command['connection']) is None
+        assert getattr(
+                boto3.resource.return_value,
+                command['method']) \
+            .assert_called_with(
+                **command['parameters']) is None
+        assert 'item' in play_json.variables
+        assert play_json.variables['item']
