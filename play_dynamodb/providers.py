@@ -30,7 +30,9 @@ class DynamoDBProvider(BaseProvider):
             dynamodb = boto3.resource(
                 'dynamodb',
                 **command['connection'])
-            method = getattr(dynamodb, method)
+            table_name = command['TableName']
+            table = dynamodb.Table(table_name)
+            method = getattr(table, method)
             results = method(**command['parameters'])
             try:
                 self._make_variable(command, results=results)
