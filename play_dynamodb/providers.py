@@ -8,12 +8,7 @@ class DynamoDBProvider(BaseProvider):
 
     ALLOWED_METHODS = [
         'get_item',
-        'batch_get_item',
-        'batch_write_item',
         'delete_item',
-        'describe_limits',
-        'describe_table',
-        'list_tables',
         'put_item',
         'query',
         'scan',

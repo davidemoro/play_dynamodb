@@ -32,26 +32,26 @@ This project defines new pytest-play_ commands for AWS DynamoDB:
 
 ::
 
-    {'type': 'dynamodb',
-     'provider': 'play_dynamodb',
-     'method': 'get_item',
-     'connection': {
-         'region_name': 'us-west-2',
-         'endpoint_url': 'http://localhost:8000',
+    {"type": "dynamodb",
+     "provider": "play_dynamodb",
+     "method": "get_item",
+     "connection": {
+         "region_name": "us-west-2",
+         "endpoint_url": "http://localhost:8000"
          },
-     'variable': 'item',
-     'variable_expression': 'response',
-     'assertion': 'item['Item']['AlbumTitle']['S'] == 'Songs About Life'',
-     'parameters': {
-         'Key': {
-             'Artist': {
-                 'S': 'Acme Band',
+     "variable": "item",
+     "variable_expression": "response",
+     "assertion": "item['Item']['AlbumTitle']['S'] == 'Songs About Life'",
+     "TableName": "Music",
+     "parameters": {
+         "Key": {
+             "Artist": {
+                 "S": "Acme Band"
                  },
-             'SongTitle': {
-                 'S': 'Happy Day',
-                 },
-             },
-         'TableName': 'Music',
+             "SongTitle": {
+                 "S": "Happy Day"
+                 }
+             }
          }
     }
 
@@ -60,9 +60,7 @@ Supported methods:
 * batch_get_item
 * batch_write_item
 * delete_item
-* describe_table
 * get_item
-* list_tables
 * put_item
 * query
 * scan
