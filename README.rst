@@ -6,8 +6,8 @@ play dynamodb
 .. image:: https://img.shields.io/pypi/v/play_dynamodb.svg
         :target: https://pypi.python.org/pypi/play_dynamodb
 
-.. image:: https://img.shields.io/travis/davidemoro/play_dynamodb.svg
-        :target: https://travis-ci.org/davidemoro/play_dynamodb
+.. image:: https://travis-ci.org/davidemoro/play_dynamodb.svg?branch=develop
+       :target: https://travis-ci.org/davidemoro/play_dynamodb
 
 .. image:: https://readthedocs.org/projects/play-dynamodb/badge/?version=latest
         :target: https://play-dynamodb.readthedocs.io/en/latest/?badge=latest
