@@ -12,7 +12,7 @@ with open('CHANGES.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'pytest-play>=1.0.0',
+    'pytest-play>=2.0.0',
     'boto3',
 ]
 
@@ -33,7 +33,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Davide Moro",
     author_email='davide.moro@gmail.com',
-    url='https://github.com/tierratelematics/play_dynamodb',
+    url='https://github.com/davidemoro/play_dynamodb',
     packages=find_packages(include=['play_dynamodb']),
     entry_points={
         'playcommands': [

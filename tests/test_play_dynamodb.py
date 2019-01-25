@@ -155,11 +155,11 @@ def variables():
           }
       },
     ])
-def test_provider(play_json, command):
+def test_provider(play, command):
     import mock
     from play_dynamodb import providers
-    provider = providers.DynamoDBProvider(play_json)
-    assert provider.engine is play_json
+    provider = providers.DynamoDBProvider(play)
+    assert provider.engine is play
 
     with mock.patch('play_dynamodb.providers.boto3') as boto3:
         provider.command_dynamodb(command)
@@ -195,11 +195,11 @@ def test_provider(play_json, command):
           }
       },
     ])
-def test_provider_not_allowed(play_json, command):
+def test_provider_not_allowed(play, command):
     import mock
     from play_dynamodb import providers
-    provider = providers.DynamoDBProvider(play_json)
-    assert provider.engine is play_json
+    provider = providers.DynamoDBProvider(play)
+    assert provider.engine is play
 
     with mock.patch('play_dynamodb.providers.boto3') as boto3:
         with pytest.raises(ValueError):
@@ -241,11 +241,11 @@ def test_provider_not_allowed(play_json, command):
           }
       },
     ])
-def test_provider_variable_assertion(play_json, command):
+def test_provider_variable_assertion(play, command):
     import mock
     from play_dynamodb import providers
-    provider = providers.DynamoDBProvider(play_json)
-    assert provider.engine is play_json
+    provider = providers.DynamoDBProvider(play)
+    assert provider.engine is play
 
     with mock.patch('play_dynamodb.providers.boto3') as boto3:
         getattr(
@@ -274,8 +274,8 @@ def test_provider_variable_assertion(play_json, command):
                 command['method']) \
             .assert_called_with(
                 **command['parameters']) is None
-        assert 'item' in play_json.variables
-        assert play_json.variables['item']
+        assert 'item' in play.variables
+        assert play.variables['item']
 
 
 @pytest.mark.parametrize(
@@ -306,11 +306,11 @@ def test_provider_variable_assertion(play_json, command):
           }
       },
     ])
-def test_provider_variable_assertion_ko(play_json, command):
+def test_provider_variable_assertion_ko(play, command):
     import mock
     from play_dynamodb import providers
-    provider = providers.DynamoDBProvider(play_json)
-    assert provider.engine is play_json
+    provider = providers.DynamoDBProvider(play)
+    assert provider.engine is play
 
     with mock.patch('play_dynamodb.providers.boto3') as boto3:
         getattr(
@@ -340,5 +340,5 @@ def test_provider_variable_assertion_ko(play_json, command):
                 command['method']) \
             .assert_called_with(
                 **command['parameters']) is None
-        assert 'item' in play_json.variables
-        assert play_json.variables['item']
+        assert 'item' in play.variables
+        assert play.variables['item']
